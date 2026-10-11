@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fff0ec">
+<title>A Little Birthday Surprise</title>
+
+<style>
+:root {
+  --pink: #d84e69;
+  --rose: #b92f50;
+  --ink: #512d37;
+  --muted: #8e6670;
+  --paper: #fffaf5;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: Georgia, serif;
+  background: linear-gradient(
+    145deg,
+    #fff8f0,
+    #ffe4e2 55%,
+    #fff3e8
+  );
+  overflow-x: hidden;
+}
+
+body:before {
+  content: "♡ ✿ ♡ ✧ ♡ ✿ ♡";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  color: #df9ca8;
+  opacity: .15;
+  font-size: 32px;
+  letter-spacing: 24px;
+  line-height: 2.8;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.wrap {
+  width: min(1000px, 92%);
+  margin: auto;
+}
+
+.section { padding: 90px 0; }
+
+.center { text-align: center; }
+
+.eyebrow {
+  font: 700 11px Arial, sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: clamp(52px, 9vw, 98px);
+  line-height: .94;
+  font-weight: 400;
+  letter-spacing: -3px;
+  margin: 0 0 24px;
+}
+
+h2 {
+  font-size: clamp(36px, 6vw, 62px);
+  font-weight: 400;
+  line-height: 1.08;
+  margin: 0 0 18px;
+}
+
+.script {
+  font-style: italic;
+  color: var(--rose);
+}
+
+p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.lead {
+  max-width: 650px;
+  margin: 0 auto 26px;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid #e5a3ad;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--rose);
+  padding: 13px 22px;
+  margin: 7px;
+  transition: .2s;
+  box-shadow: 0 8px 20px #b92f5010;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.primary {
+  background: linear-gradient(135deg, #ed8193, #c92f55);
+  color: white;
+  border: 0;
+}
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 70px 0;
+  position: relative;
+}
+
+.hero:after {
+  content: "";
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  height: 40px;
+  width: 1px;
+  background: #d98d9a;
+}
+
+.decor {
+  font-size: 35px;
+  margin-bottom: 22px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-8px); }
+}
+
+.paper,
+.activity,
+.reason,
+.surprise {
+  background: #fffaf5e8;
+  border: 1px solid #f1c8c7;
+  border-radius: 22px;
+  box-shadow: 0 12px 35px #b92f500b;
+}
+
+.question {
+  max-width: 680px;
+  margin: 32px auto;
+  padding: 30px;
+  min-height: 190px;
+  position: relative;
+  overflow: hidden;
+}
+
+.question h3 {
+  font-weight: 400;
+  font-size: 27px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 35px;
+}
+
+.reason {
+  padding: 24px 17px;
+  min-height: 170px;
+  transition: .25s;
+}
+
+.reason:hover,
+.activity:hover,
+.surprise:hover {
+  transform: translateY(-5px);
+}
+
+.reason .icon {
+  font-size: 27px;
+  color: var(--pink);
+}
+
+.reason h3,
+.activity h3,
+.surprise h3 {
+  font-weight: 400;
+  font-size: 21px;
+  margin: 12px 0 8px;
+}
+
+.reason p,
+.activity p,
+.surprise p {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 35px;
+}
+
+.activity {
+  padding: 26px 22px;
+  min-height: 205px;
+  transition: .25s;
+}
+
+.emoji { font-size: 32px; }
+
+.mini {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 17px;
+  background: #f8d9df;
+  color: var(--rose);
+  margin-top: 8px;
+}
+
+.game {
+  min-height: 45px;
+  margin-top: 12px;
+}
+
+.hearts,
+.options {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+
+.heart {
+  font-size: 28px;
+  border: 0;
+  background: none;
+}
+
+.options button {
+  border: 1px solid #e9b4bc;
+  background: white;
+  color: var(--rose);
+  border-radius: 12px;
+  padding: 9px;
+}
+
+.flower-stage {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 28px 20px 35px;
+  background: linear-gradient(145deg, #fffaf4, #ffe7e1);
+  border: 1px solid #f3c4c4;
+  border-radius: 30px;
+  box-shadow: 0 18px 50px #c65b6b12;
+}
+
+.bouquet-button {
+  border: 0;
+  background: none;
+  display: block;
+  margin: auto;
+  transition: .3s;
+}
+
+.bouquet-button:hover {
+  transform: scale(1.04) rotate(-1deg);
+}
+
+.bouquet {
+  font-size: clamp(100px, 18vw, 170px);
+  line-height: 1.2;
+  filter: drop-shadow(0 12px 12px #ad536022);
+}
+
+.tap {
+  font: 700 11px Arial, sans-serif;
+  letter-spacing: 2px;
+  color: var(--rose);
+  text-transform: uppercase;
+}
+
+.note {
+  display: none;
+  max-width: 500px;
+  margin: 20px auto 0;
+  padding: 24px;
+  background: #fffaf8;
+  border: 1px dashed #dc8795;
+  border-radius: 20px;
+  animation: pop .4s;
+}
+
+.note.show { display: block; }
+
+.note h3 {
+  font-size: 29px;
+  font-weight: 400;
+  margin: 0 0 10px;
+}
+
+.note p { margin: 8px 0; }
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.birthday {
+  background: linear-gradient(135deg, #ffe4df, #fff4e7);
+  border: 1px solid #f0c5c3;
+  border-radius: 30px;
+  padding: 42px 24px;
+}
+
+.cake {
+  font-size: 78px;
+  margin: 15px;
+}
+
+.letter {
+  max-width: 760px;
+  margin: auto;
+  background: #fffaf5;
+  border: 1px solid #f0c8c4;
+  border-radius: 8px;
+  padding: clamp(25px, 6vw, 50px);
+  text-align: left;
+  transform: rotate(-.4deg);
+}
+
+.letter p { color: #80515c; }
+
+.letter .sign {
+  font-size: 22px;
+  font-style: italic;
+  color: var(--rose);
+}
+
+.surprises {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 32px;
+}
+
+.surprise {
+  padding: 24px 16px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.surprise span { font-size: 30px; }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: #5c263b77;
+  backdrop-filter: blur(7px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 20;
+}
+
+.modal.show { display: flex; }
+
+.modalbox {
+  max-width: 540px;
+  width: 100%;
+  padding: 32px;
+  background: var(--paper);
+  border: 1px solid #efc4c5;
+  border-radius: 24px;
+  position: relative;
+}
+
+.modalbox h3 {
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.close {
+  position: absolute;
+  right: 14px;
+  top: 8px;
+  border: 0;
+  background: none;
+  color: var(--rose);
+  font-size: 28px;
+}
+
+.footer {
+  text-align: center;
+  padding: 45px 15px 60px;
+  color: #b27680;
+  font: 10px Arial, sans-serif;
+  letter-spacing: 3px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: #7c2d46;
+  color: white;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font: 13px Arial, sans-serif;
+  opacity: 0;
+  transition: .25s;
+  z-index: 30;
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.petal {
+  position: fixed;
+  top: -30px;
+  pointer-events: none;
+  z-index: 15;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(600deg);
+    opacity: .2;
+  }
+}
+
+@media(max-width:720px) {
+  .section { padding: 68px 0; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .activity-grid,
+  .surprises { grid-template-columns: 1fr; }
+  .question {
+    padding: 22px;
+    min-height: 210px;
+  }
+  .letter { transform: none; }
+  .hero { min-height: 95svh; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <div class="decor">🌷 ✨ 🎀</div>
+    <div class="eyebrow">A little something for you</div>
+    <h1>A little<br><span class="script">something</span><br>for you ♡</h1>
+    <p class="lead">Today is a special day… and I made this little corner of the internet to make it a bit brighter for you.</p>
+    <a class="btn primary" href="#question">Open your gift →</a>
+  </div>
+</header>
+
+<section class="section center" id="question">
+  <div class="wrap">
+    <div class="eyebrow">Before we begin</div>
+    <h2>Do you want your<br><span class="script">birthday gift?</span></h2>
+    <p class="lead">Choose wisely… there's only one correct answer. ♡</p>
+
+    <div class="paper question" id="questionBox">
+      <h3>Ready for a little surprise?</h3>
+      <button class="btn primary" onclick="giftAccepted()">Obviously! ♡</button>
+      <button class="btn" id="noBtn">No</button>
+    </div>
+  </div>
+</section>
+
+<section class="section center">
+  <div class="wrap">
+    <div class="eyebrow">A few little reminders</div>
+    <h2>Some of the many reasons<br><span class="script">you're so special.</span></h2>
+    <p class="lead">Not a complete list, of course. We'd need a much bigger website for that.</p>
+
+    <div class="grid">
+      <article class="reason">
+        <div class="icon">☀</div>
+        <h3>You make things lighter.</h3>
+        <p>Your presence can make an ordinary day feel a little better.</p>
+      </article>
+
+      <article class="reason">
+        <div class="icon">♡</div>
+        <h3>You make me smile.</h3>
+        <p>Sometimes without even trying, and often without knowing it.</p>
+      </article>
+
+      <article class="reason">
+        <div class="icon">✧</div>
+        <h3>You bring warmth.</h3>
+        <p>You have a way of making the world feel a little kinder.</p>
+      </article>
+
+      <article class="reason">
+        <div class="icon">🌷</div>
+        <h3>You're wonderfully you.</h3>
+        <p>There's only one you, and that's a pretty lovely thing.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section center" id="fun">
+  <div class="wrap">
+    <div class="eyebrow">Let's have some fun</div>
+    <h2>A few little activities<br><span class="script">made just for you.</span></h2>
+    <p class="lead">Take your time. There are tiny surprises hiding in here.</p>
+
+    <div class="activity-grid">
+      <article class="activity">
+        <div class="emoji">💌</div>
+        <h3>Catch the Hearts</h3>
+        <p>Tap as many hearts as you can before the timer ends.</p>
+        <button class="mini" onclick="startHearts()">Start game</button>
+        <div class="game" id="heartGame"></div>
+      </article>
+
+      <article class="activity">
+        <div class="emoji">🧩</div>
+        <h3>Birthday Quiz</h3>
+        <p>One tiny quiz. No pressure… probably.</p>
+        <button class="mini" onclick="startQuiz()">Start quiz</button>
+        <div class="game" id="quizGame"></div>
+      </article>
+
+      <article class="activity">
+        <div class="emoji">🎁</div>
+        <h3>Pick a surprise</h3>
+        <p>Choose one gift box to reveal a message.</p>
+        <div class="hearts">
+          <button class="heart" onclick="giftBox(1)">🎁</button>
+          <button class="heart" onclick="giftBox(2)">🎁</button>
+          <button class="heart" onclick="giftBox(3)">🎁</button>
+        </div>
+        <div class="game" id="boxGame"></div>
+      </article>
+
+      <article class="activity">
+        <div class="emoji">💗</div>
+        <h3>Make a wish</h3>
+        <p>Send a birthday wish into the universe.</p>
+        <button class="mini" onclick="makeWish()">Make a wish ✨</button>
+        <div class="game" id="wishGame"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section center" id="bouquet">
+  <div class="wrap">
+    <div class="eyebrow">A little surprise for you</div>
+    <h2>Flowers for you.<br><span class="script">For now…</span></h2>
+    <p class="lead">There's something waiting for you below. Go on, tap the bouquet. 🌷</p>
+
+    <div class="flower-stage">
+      <button class="bouquet-button" id="bouquetBtn" onclick="openBouquet()" aria-label="Open the flower bouquet">
+        <div class="bouquet">💐</div>
+        <div class="tap">Tap to open your bouquet ♡</div>
+      </button>
+
+      <div class="note" id="realNote">
+        <h3>A little something… ♡</h3>
+        <p>Just a little something for now, until the real one arrives.</p>
+        <p><strong>Happy Birthday!</strong> 🌷</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section center">
+  <div class="wrap">
+    <div class="birthday">
+      <div class="eyebrow">The most important part</div>
+      <h2>Happy Birthday,<br><span class="script">beautiful soul.</span></h2>
+      <div class="cake">🎂</div>
+      <p class="lead">Today is your day — a day to celebrate you, your beautiful heart, and all the little things that make you who you are.</p>
+      <p class="lead">You make my life brighter, happier, and so much more meaningful. I'm grateful for you, and I hope this new year brings you the kind of happiness that stays.</p>
+      <button class="btn primary" onclick="celebrate()">Make a wish ✨</button>
+    </div>
+  </div>
+</section>
+
+<section class="section center">
+  <div class="wrap">
+    <div class="eyebrow">A letter for you</div>
+    <h2>Just a few words<br><span class="script">from my heart.</span></h2>
+
+    <div class="letter">
+      <p>I wanted to make something a little different for your birthday, because a day like today deserves more than an ordinary message.</p>
+      <p>You bring so much warmth, happiness, and meaning into my life. Even the smallest moments can feel special because you're part of them, and I'm genuinely thankful to have you in my world.</p>
+      <p>Today, I hope you feel celebrated, appreciated, and loved in all the ways you deserve. I hope this next chapter brings you beautiful surprises, new adventures, peaceful days, and countless reasons to smile.</p>
+      <p>If this little website made you smile even once, then it did exactly what I hoped it would.</p>
+      <p class="sign">Happy Birthday, you. ♡</p>
+    </div>
+  </div>
+</section>
+
+<section class="section center" id="surprises">
+  <div class="wrap">
+    <div class="eyebrow">There's more</div>
+    <h2>More little surprises<br><span class="script">for you.</span></h2>
+
+    <div class="surprises">
+      <button class="surprise" onclick="openModal('song')">
+        <span>🎧</span>
+        <h3>A song for you</h3>
+        <p>Open a little music note.</p>
+      </button>
+
+      <button class="surprise" onclick="openModal('secret')">
+        <span>🔐</span>
+        <h3>Hidden message</h3>
+        <p>There's a secret word somewhere.</p>
+      </button>
+
+      <button class="surprise" onclick="celebrate()">
+        <span>🎉</span>
+        <h3>Confetti mode</h3>
+        <p>Because it's your birthday!</p>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="section center">
+  <div class="wrap">
+    <div class="decor">♡ 🌸 ♡</div>
+    <h2>Thank you<br><span class="script">for being you.</span></h2>
+    <p class="lead">I hope this year gives you all the happiness, love, and beautiful moments you deserve. Keep being the amazing person you are, and never forget how much you mean to me.</p>
+    <button class="btn primary" onclick="celebrate()">And always… Happy Birthday ♡</button>
+  </div>
+</section>
+
+<footer class="footer">MADE WITH LOVE, JUST FOR YOUR BIRTHDAY ♡</footer>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modalbox">
+    <button class="close" onclick="closeModal()">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+function toast(message) {
+  const element = $('toast');
+  element.textContent = message;
+  element.classList.add('show');
+  setTimeout(() => element.classList.remove('show'), 2500);
+}
+
+const noButton = $('noBtn');
+const questionBox = $('questionBox');
+
+function runAway() {
+  const box = questionBox.getBoundingClientRect();
+  const button = noButton.getBoundingClientRect();
+
+  noButton.style.position = 'absolute';
+  noButton.style.left =
+    Math.max(8, Math.random() * (box.width - button.width - 16)) + 'px';
+  noButton.style.top =
+    Math.max(65, Math.random() * (box.height - button.height - 45)) + 'px';
+}
+
+noButton.addEventListener('pointerenter', runAway);
+noButton.addEventListener('touchstart', event => {
+  event.preventDefault();
+  runAway();
+});
+
+function giftAccepted() {
+  toast('Excellent choice. Your surprise awaits! ♡');
+  $('fun').scrollIntoView({ behavior: 'smooth' });
+}
+
+function startHearts() {
+  let score = 0;
+  let seconds = 12;
+  const area = $('heartGame');
+
+  area.innerHTML =
+    '<p>Time: <b id="timeLeft">12</b>s · Hearts: <b id="score">0</b></p>' +
+    '<div class="hearts" id="heartButtons"></div>';
+
+  const buttons = $('heartButtons');
+
+  function drawHearts() {
+    buttons.innerHTML = '';
+
+    for (let i = 0; i < 5; i++) {
+      const button = document.createElement('button');
+      button.className = 'heart';
+      button.textContent =
+        ['♡', '💗', '💖', '💕', '💘'][Math.floor(Math.random() * 5)];
+
+      button.onclick = () => {
+        score++;
+        $('score').textContent = score;
+        drawHearts();
+      };
+
+      buttons.appendChild(button);
+    }
+  }
+
+  drawHearts();
+
+  const timer = setInterval(() => {
+    seconds--;
+    $('timeLeft').textContent = seconds;
+
+    if (seconds <= 0) {
+      clearInterval(timer);
+      buttons.innerHTML = '';
+      area.insertAdjacentHTML(
+        'beforeend',
+        `<p>You caught ${score} hearts! You deserve every one. ♡</p>`
+      );
+    }
+  }, 1000);
+}
+
+function startQuiz() {
+  $('quizGame').innerHTML =
+    '<p><strong>What makes a birthday extra special?</strong></p>' +
+    '<div class="options">' +
+    '<button onclick="quizAnswer()">Cake</button>' +
+    '<button onclick="quizAnswer()">Surprises</button>' +
+    '<button onclick="quizAnswer()">Feeling loved</button>' +
+    '</div><p id="quizAnswer"></p>';
+}
+
+function quizAnswer() {
+  $('quizAnswer').textContent =
+    'All of them! Especially when they make you smile. ♡';
+}
+
+function giftBox(number) {
+  const messages = [
+    'A reminder that you deserve beautiful things. ♡',
+    'A wish for a year full of happy surprises. ✨',
+    'A tiny virtual hug, delivered with love. 💗'
+  ];
+
+  $('boxGame').textContent = messages[number - 1];
+}
+
+function makeWish() {
+  $('wishGame').textContent =
+    'Your wish is on its way to the universe. ✨';
+
+  celebrate(35);
+}
+
+function openBouquet() {
+  $('realNote').classList.add('show');
+  $('bouquetBtn').style.transform = 'scale(1.05)';
+  celebrate(25);
+
+  setTimeout(() => {
+    $('realNote').scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    });
+  }, 200);
+}
+
+function celebrate(count = 85) {
+  for (let i = 0; i < count; i++) {
+    const petal = document.createElement('span');
+    petal.className = 'petal';
+
+    petal.textContent =
+      ['♡', '✿', '♥', '✧', '🌸'][Math.floor(Math.random() * 5)];
+
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.animationDuration = (3 + Math.random() * 4) + 's';
+    petal.style.fontSize = (14 + Math.random() * 18) + 'px';
+
+    petal.style.color =
+      ['#d84e69', '#f1a0a9', '#d6a04c', '#f7c8bc']
+      [Math.floor(Math.random() * 4)];
+
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), 7500);
+  }
+}
+
+function openModal(type) {
+  if (type === 'song') {
+    $('modalContent').innerHTML =
+      '<h3>A song for you ♫</h3>' +
+      '<p>This space is ready for a song you choose. We can add the actual music file before you share the website.</p>';
+  } else {
+    $('modalContent').innerHTML =
+      '<h3>You found a secret! 🔐</h3>' +
+      '<p>Type <strong>birthday</strong> anywhere on your keyboard to unlock a tiny celebration. ♡</p>';
+  }
+
+  $('modal').classList.add('show');
+}
+
+function closeModal() {
+  $('modal').classList.remove('show');
+}
+
+let typed = '';
+
+document.addEventListener('keydown', event => {
+  typed = (typed + event.key.toLowerCase()).slice(-8);
+
+  if (typed === 'birthday') {
+    celebrate();
+    toast('Secret unlocked! Happy Birthday ♡');
+    typed = '';
+  }
+});
+</script>
+
+</body>
+</html>
