@@ -1,1 +1,735 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>For Menna</title><style>@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Noto+Kufi+Arabic&display=swap');*{box-sizing:border-box}body{margin:0;background:#140b20;color:#fff;font-family:Arial;overflow:hidden}.sky{position:fixed;inset:0;background:radial-gradient(circle at 20% 15%,#702954,transparent 25%),radial-gradient(circle at 85% 85%,#263b70,transparent 28%),#140b20}.page{position:fixed;inset:0;display:grid;place-items:center;padding:5rem 1.2rem;opacity:0;visibility:hidden;transform:scale(1.04);transition:.6s}.page.on{opacity:1;visibility:visible;transform:none}.in{max-width:650px;text-align:center}h1,h2{font:600 clamp(3rem,11vw,6rem) 'Cormorant Garamond';line-height:.9;margin:.3rem}i{color:#ff9fc6}.k{letter-spacing:.2em;font-size:.65rem;color:#ff9fc6}p{line-height:1.8;color:#e7d6e4;max-width:540px;margin:1rem auto}.heart{font-size:5rem;filter:drop-shadow(0 0 20px #ff76b4);animation:p 2s infinite}@keyframes p{50%{transform:scale(1.15)}}button,input{border-radius:999px;border:1px solid #ffffff40;padding:.8rem 1.1rem;background:#ffffff14;color:#fff}button{cursor:pointer}button.main{background:#ffb5d5;color:#321020;border:0;font-weight:bold}.card{padding:1.3rem;border:1px solid #ffffff36;background:#ffffff12;border-radius:22px;backdrop-filter:blur(8px)}.q{font-family:'Noto Kufi Arabic';direction:rtl;font-size:1.05rem}.choices{display:grid;gap:.6rem;max-width:450px;margin:auto}.choices button{text-align:right;font-family:'Noto Kufi Arabic'}.chosen{background:#ff9fc650!important}.reply{font-family:'Noto Kufi Arabic';color:#ffd5e6;min-height:3em}.top{position:fixed;z-index:5;top:1rem;left:1rem;right:1rem;display:flex;justify-content:space-between}.nav{position:fixed;z-index:5;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem}.hide{display:none}.conf{position:fixed;top:-20px;animation:f 4s linear forwards}@keyframes f{to{transform:translateY(110vh) rotate(500deg)}}@media(max-width:500px){.form{display:grid;gap:.5rem}}</style></head><body><div class="sky"></div><div class="top hide" id="top"><span id="count"></span><button id="music">♫ add song.mp3</button></div><section class="page on" id="gate"><div class="in"><div class="heart">♥</div><p class="k">A SMALL UNIVERSE, MADE FOR YOU</p><h1>For <i>Menna.</i></h1><p>There is a little journey waiting behind this door.</p><form class="card form" id="form"><label>Enter the date that opens it</label><br><br><input id="pass" placeholder="dd/mm" inputmode="numeric"><button class="main">Enter ♡</button><p id="err"></p></form></div></section><section class="page"><div class="in"><p class="k">CHAPTER ONE</p><div class="heart">✦</div><h2>You changed the way<br>I see <i>everything.</i></h2><p class="typed" data="Before you, the ordinary was just ordinary. Then you arrived — and even the smallest moments began to feel worth keeping."></p></div></section><section class="page"><div class="in"><p class="k">A QUESTION FOR YOU</p><h2>Pick what feels<br><i>most you.</i></h2><p class="q">لو كان يومكِ فيلمًا جميلًا، أي مشهد تحبين أن أكون فيه؟</p><div class="choices"><button data-r="في كل مشهد… لأن أجمل شيء فيه هو أنكِ فيه. ♡">المشهد الهادئ في آخر اليوم</button><button data-r="اختيار دافئ جدًا… وأتمنى أن أكون دائمًا سبب ابتسامتكِ. ♡">المشهد الذي يجعلكِ تبتسمين</button><button data-r="كل المغامرات تصبح أحلى عندما نعيشها معًا. ♡">المشهد المليء بالمغامرات</button></div><p class="reply"></p></div></section><section class="page"><div class="in"><p class="k">A QUIET TRUTH</p><div class="heart">✧</div><h2>You make life feel<br>more like <i>home.</i></h2><p class="typed" data="Not because you make every day perfect. But because your presence makes the imperfect days softer, safer, and much more beautiful."></p></div></section><section class="page"><div class="in"><p class="k">ANOTHER LITTLE QUESTION</p><h2>A tiny choice,<br>a <i>big answer.</i></h2><p class="q">ما أكثر شيء تتمنين أن يبقى بيننا دائمًا؟</p><div class="choices"><button data-r="وأنا أتمنى أن تظل ضحكتكِ سببًا للفرح دائمًا. ♡">الضحك من القلب</button><button data-r="أتمنى أن نشعر بالأمان في كل حكاية نشاركها معًا. ♡">الراحة والأمان</button><button data-r="هذا وعد جميل: أن تظل التفاصيل الصغيرة هي أجمل ما فينا. ♡">التفاصيل الصغيرة</button></div><p class="reply"></p></div></section><section class="page"><div class="in card"><p class="k">THE LETTER</p><h2>Happy Birthday,<br><i>my love.</i></h2><p>I hope this year brings you the kind of happiness that stays — the quiet kind that finds you in little moments and reminds you how loved you are.</p><p>Thank you for being the person whose existence made my world feel brighter. You are precious to me, in more ways than these pages could ever say.</p><button class="main" id="wish">Make a wish ✦</button></div></section><section class="page"><div class="in"><div class="heart">♥</div><h1>Happy Birthday,<br><i>my love.</i></h1><p>May your new year bring warm mornings, beautiful surprises, and every reason to smile. You deserve all of it.</p><button id="again">Start again ↺</button></div></section><nav class="nav hide" id="nav"><button id="prev">←</button><button id="next">→</button></nav><audio id="song" loop><source src="song.mp3" type="audio/mpeg"></audio><script>let p=[...document.querySelectorAll('.page')],n=0,t;function show(x){n=Math.max(0,Math.min(p.length-2,x));p.forEach((e,i)=>e.classList.toggle('on',i===n+1));count.textContent=String(n+1).padStart(2,'0')+' / 06';prev.disabled=n===0;next.disabled=n===5;let e=p[n+1].querySelector('.typed');if(e){clearInterval(t);let w=e.dataset.split(' '),i=0;e.textContent='';t=setInterval(()=>{e.textContent+=(i?' ':'')+w[i++];if(i==w.length)clearInterval(t)},75)}}form.onsubmit=e=>{e.preventDefault();if(pass.value.trim()!='19/11'){err.textContent='Almost — try the date we share. ♡';return}gate.classList.remove('on');top.classList.remove('hide');nav.classList.remove('hide');show(0);song.play().catch(()=>{})};next.onclick=()=>show(n+1);prev.onclick=()=>show(n-1);document.querySelectorAll('.choices button').forEach(b=>b.onclick=()=>{b.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('chosen'));b.classList.add('chosen');b.parentElement.nextElementSibling.textContent=b.dataset.r});music.onclick=()=>song.paused?song.play():song.pause();wish.onclick=()=>{for(let i=0;i<45;i++){let e=document.createElement('b');e.className='conf';e.textContent='✦';e.style.left=Math.random()*100+'vw';e.style.color='#ff9fc6';document.body.append(e);setTimeout(()=>e.remove(),4500)}setTimeout(()=>show(5),500)};again.onclick=()=>show(0)</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#140b20">
+<title>For Menna</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Noto+Kufi+Arabic&display=swap');
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#140b20;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  overflow:hidden
+}
+
+.sky{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 15%,#702954,transparent 25%),
+    radial-gradient(circle at 85% 85%,#263b70,transparent 28%),
+    #140b20
+}
+
+.page{
+  position:fixed;
+  inset:0;
+  display:grid;
+  place-items:center;
+  padding:5rem 1.2rem;
+  overflow-y:auto;
+  opacity:0;
+  visibility:hidden;
+  transform:scale(1.025);
+  transition:opacity .5s,transform .5s,visibility .5s
+}
+
+.page.on{
+  opacity:1;
+  visibility:visible;
+  transform:none
+}
+
+.in{
+  width:100%;
+  max-width:650px;
+  text-align:center;
+  margin:auto
+}
+
+h1,h2{
+  font:600 clamp(3rem,11vw,6rem) 'Cormorant Garamond',serif;
+  line-height:.95;
+  margin:.3rem
+}
+
+i{color:#ff9fc6}
+
+.k{
+  letter-spacing:.2em;
+  font-size:.65rem;
+  color:#ff9fc6
+}
+
+p{
+  line-height:1.8;
+  color:#e7d6e4;
+  max-width:540px;
+  margin:1rem auto
+}
+
+.heart{
+  font-size:5rem;
+  filter:drop-shadow(0 0 20px #ff76b4);
+  animation:pulse 2s infinite
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.12)}
+}
+
+button,input{
+  border-radius:999px;
+  border:1px solid #ffffff40;
+  padding:.8rem 1.1rem;
+  background:#ffffff14;
+  color:#fff
+}
+
+button{cursor:pointer}
+
+button:focus-visible,input:focus-visible{
+  outline:2px solid #ffb5d5;
+  outline-offset:3px
+}
+
+button.main{
+  background:#ffb5d5;
+  color:#321020;
+  border:0;
+  font-weight:bold
+}
+
+.card{
+  padding:1.3rem;
+  border:1px solid #ffffff36;
+  background:#ffffff12;
+  border-radius:22px;
+  backdrop-filter:blur(8px)
+}
+
+.q{
+  font-family:'Noto Kufi Arabic',sans-serif;
+  direction:rtl;
+  font-size:1.05rem
+}
+
+.choices{
+  display:grid;
+  gap:.6rem;
+  max-width:450px;
+  margin:auto
+}
+
+.choices button{
+  text-align:right;
+  font-family:'Noto Kufi Arabic',sans-serif;
+  direction:rtl
+}
+
+.chosen{
+  background:#ff9fc650!important;
+  border-color:#ff9fc6
+}
+
+.reply{
+  font-family:'Noto Kufi Arabic',sans-serif;
+  color:#ffd5e6;
+  min-height:3em
+}
+
+.top{
+  position:fixed;
+  z-index:5;
+  top:1rem;
+  left:1rem;
+  right:1rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+
+.nav{
+  position:fixed;
+  z-index:5;
+  bottom:1rem;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:.5rem
+}
+
+.hide{display:none!important}
+
+.conf{
+  position:fixed;
+  top:-20px;
+  animation:fall 4s linear forwards;
+  pointer-events:none
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(500deg)}
+}
+
+.typed{min-height:1.4em}
+
+@media(max-width:500px){
+  .form{display:grid;gap:.5rem}
+  .page{padding:5rem 1.2rem 5.5rem}
+  h1,h2{line-height:1}
+  .heart{font-size:4rem}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sky" aria-hidden="true"></div>
+
+<div class="top hide" id="topBar">
+  <span id="pageCount" aria-live="polite"></span>
+  <button id="musicButton" type="button" aria-label="Toggle music">
+    ♫ Music off
+  </button>
+</div>
+
+<!-- ضع ملف الموسيقى song.mp3 بجوار index.html -->
+<audio id="song" loop preload="none">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- شاشة كلمة السر -->
+<section class="page on" id="gate">
+  <div class="in">
+
+    <div class="heart">♥</div>
+
+    <p class="k">A SMALL UNIVERSE, MADE FOR YOU</p>
+
+    <h1>For <i>Menna.</i></h1>
+
+    <p>There is a little journey waiting behind this door.</p>
+
+    <form class="card form" id="passwordForm">
+
+      <label for="passwordInput">
+        Enter the date that opens it
+      </label>
+
+      <br><br>
+
+      <input
+        id="passwordInput"
+        type="password"
+        placeholder="dd/mm"
+        inputmode="numeric"
+        autocomplete="off"
+        required
+      >
+
+      <button class="main" type="submit">
+        Enter ♡
+      </button>
+
+      <p id="passwordError" role="status" aria-live="polite"></p>
+
+    </form>
+
+  </div>
+</section>
+
+<!-- صفحات الموقع -->
+<main id="journey" class="hide">
+
+  <!-- الصفحة الأولى -->
+  <section class="page">
+    <div class="in">
+
+      <p class="k">CHAPTER ONE</p>
+
+      <div class="heart">✦</div>
+
+      <h2>
+        You changed the way<br>
+        I see <i>everything.</i>
+      </h2>
+
+      <p
+        class="typed"
+        data-text="Before you, the ordinary was just ordinary. Then you arrived — and even the smallest moments began to feel worth keeping."
+      ></p>
+
+    </div>
+  </section>
+
+  <!-- السؤال الأول -->
+  <section class="page">
+    <div class="in">
+
+      <p class="k">A QUESTION FOR YOU</p>
+
+      <h2>
+        Pick what feels<br>
+        <i>most you.</i>
+      </h2>
+
+      <p class="q">
+        لو كان يومكِ فيلمًا جميلًا، أي مشهد تحبين أن أكون فيه؟
+      </p>
+
+      <div class="choices">
+
+        <button type="button"
+          data-reply="في كل مشهد… لأن أجمل شيء فيه هو أنكِ فيه. ♡">
+          المشهد الهادئ في آخر اليوم
+        </button>
+
+        <button type="button"
+          data-reply="اختيار دافئ جدًا… وأتمنى أن أكون دائمًا سبب ابتسامتكِ. ♡">
+          المشهد الذي يجعلكِ تبتسمين
+        </button>
+
+        <button type="button"
+          data-reply="كل المغامرات تصبح أحلى عندما نعيشها معًا. ♡">
+          المشهد المليء بالمغامرات
+        </button>
+
+      </div>
+
+      <p class="reply" aria-live="polite"></p>
+
+    </div>
+  </section>
+
+  <!-- الصفحة الثانية -->
+  <section class="page">
+    <div class="in">
+
+      <p class="k">A QUIET TRUTH</p>
+
+      <div class="heart">✧</div>
+
+      <h2>
+        You make life feel<br>
+        more like <i>home.</i>
+      </h2>
+
+      <p
+        class="typed"
+        data-text="Not because you make every day perfect. But because your presence makes the imperfect days softer, safer, and much more beautiful."
+      ></p>
+
+    </div>
+  </section>
+
+  <!-- السؤال الثاني -->
+  <section class="page">
+    <div class="in">
+
+      <p class="k">ANOTHER LITTLE QUESTION</p>
+
+      <h2>
+        A tiny choice,<br>
+        a <i>big answer.</i>
+      </h2>
+
+      <p class="q">
+        ما أكثر شيء تتمنين أن يبقى بيننا دائمًا؟
+      </p>
+
+      <div class="choices">
+
+        <button type="button"
+          data-reply="وأنا أتمنى أن تظل ضحكتكِ سببًا للفرح دائمًا. ♡">
+          الضحك من القلب
+        </button>
+
+        <button type="button"
+          data-reply="أتمنى أن نشعر بالأمان في كل حكاية نشاركها معًا. ♡">
+          الراحة والأمان
+        </button>
+
+        <button type="button"
+          data-reply="هذا وعد جميل: أن تظل التفاصيل الصغيرة هي أجمل ما فينا. ♡">
+          التفاصيل الصغيرة
+        </button>
+
+      </div>
+
+      <p class="reply" aria-live="polite"></p>
+
+    </div>
+  </section>
+
+  <!-- الرسالة -->
+  <section class="page">
+    <div class="in card">
+
+      <p class="k">THE LETTER</p>
+
+      <h2>
+        Happy Birthday,<br>
+        <i>my love.</i>
+      </h2>
+
+      <p
+        class="typed"
+        data-text="I hope this year brings you the kind of happiness that stays — the quiet kind that finds you in little moments and reminds you how loved you are."
+      ></p>
+
+      <p
+        class="typed"
+        data-text="Thank you for being the person whose existence made my world feel brighter. You are precious to me, in more ways than these pages could ever say."
+      ></p>
+
+      <button class="main" id="makeWish" type="button">
+        Make a wish ✦
+      </button>
+
+    </div>
+  </section>
+
+  <!-- النهاية -->
+  <section class="page">
+    <div class="in">
+
+      <div class="heart">♥</div>
+
+      <h1>
+        Happy Birthday,<br>
+        <i>my love.</i>
+      </h1>
+
+      <p
+        class="typed"
+        data-text="May your new year bring warm mornings, beautiful surprises, and every reason to smile. You deserve all of it."
+      ></p>
+
+      <button id="restartButton" type="button">
+        Start again ↺
+      </button>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- أزرار التنقل -->
+<nav class="nav hide" id="navigation" aria-label="Page navigation">
+
+  <button id="previousButton" type="button">
+    ← Back
+  </button>
+
+  <button id="nextButton" class="main" type="button">
+    Next →
+  </button>
+
+</nav>
+
+<script>
+(() => {
+  "use strict";
+
+  const PASSWORD = "19/11";
+
+  const gate = document.getElementById("gate");
+  const form = document.getElementById("passwordForm");
+  const passwordInput = document.getElementById("passwordInput");
+  const passwordError = document.getElementById("passwordError");
+
+  const journey = document.getElementById("journey");
+  const pages = Array.from(journey.querySelectorAll(".page"));
+
+  const topBar = document.getElementById("topBar");
+  const navigation = document.getElementById("navigation");
+  const pageCount = document.getElementById("pageCount");
+
+  const previousButton = document.getElementById("previousButton");
+  const nextButton = document.getElementById("nextButton");
+
+  const musicButton = document.getElementById("musicButton");
+  const song = document.getElementById("song");
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  let currentPage = 0;
+  let typeTimers = [];
+  let unlocked = false;
+
+  // إيقاف الكتابة السابقة عند تغيير الصفحة
+  function clearTyping() {
+    typeTimers.forEach(timer => clearTimeout(timer));
+    typeTimers = [];
+  }
+
+  // كتابة النص كلمة كلمة
+  function typeElement(element, delay = 48) {
+    const text = element.dataset.text || "";
+
+    element.textContent = "";
+
+    if (reduceMotion) {
+      element.textContent = text;
+      return;
+    }
+
+    const words = text.split(/\s+/);
+    let index = 0;
+
+    function writeNext() {
+      if (index >= words.length) return;
+
+      element.textContent +=
+        (index ? " " : "") + words[index++];
+
+      typeTimers.push(
+        setTimeout(writeNext, delay)
+      );
+    }
+
+    writeNext();
+  }
+
+  // الانتقال بين صفحات الرحلة
+  function showPage(index) {
+    if (!unlocked) return;
+
+    currentPage = Math.max(
+      0,
+      Math.min(pages.length - 1, index)
+    );
+
+    clearTyping();
+
+    pages.forEach((page, i) => {
+      page.classList.toggle(
+        "on",
+        i === currentPage
+      );
+
+      if (i === currentPage) {
+        page.scrollTop = 0;
+      }
+    });
+
+    pageCount.textContent =
+      String(currentPage + 1).padStart(2, "0") +
+      " / " +
+      String(pages.length).padStart(2, "0");
+
+    previousButton.disabled = currentPage === 0;
+
+    nextButton.disabled =
+      currentPage === pages.length - 1;
+
+    nextButton.classList.toggle(
+      "hide",
+      currentPage === pages.length - 1
+    );
+
+    const typedElements =
+      pages[currentPage].querySelectorAll(".typed");
+
+    typedElements.forEach((element, i) => {
+      typeTimers.push(
+        setTimeout(() => {
+          if (pages[currentPage].contains(element)) {
+            typeElement(element);
+          }
+        }, i * 450)
+      );
+    });
+  }
+
+  // التحقق من كلمة السر
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    passwordError.textContent = "";
+
+    if (passwordInput.value.trim() !== PASSWORD) {
+      passwordError.textContent =
+        "Almost — try the date again. ♡";
+
+      passwordInput.select();
+      return;
+    }
+
+    unlocked = true;
+
+    gate.classList.remove("on");
+
+    journey.classList.remove("hide");
+    topBar.classList.remove("hide");
+    navigation.classList.remove("hide");
+
+    // عرض الصفحة الأولى بعد الدخول
+    showPage(0);
+
+    // محاولة تشغيل الموسيقى
+    try {
+      await song.play();
+      musicButton.textContent = "♫ Music on";
+    } catch {
+      musicButton.textContent = "♫ Play music";
+    }
+  });
+
+  // الانتقال للأمام والخلف
+  previousButton.addEventListener("click", () => {
+    showPage(currentPage - 1);
+  });
+
+  nextButton.addEventListener("click", () => {
+    showPage(currentPage + 1);
+  });
+
+  // تفاعلات الاختيارات العربية
+  document.querySelectorAll("[data-reply]").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const group = button.closest(".choices");
+
+      group.querySelectorAll("button").forEach(item => {
+        item.classList.remove("chosen");
+      });
+
+      button.classList.add("chosen");
+
+      const reply = group.nextElementSibling;
+
+      if (reply && reply.classList.contains("reply")) {
+        reply.textContent = button.dataset.reply;
+      }
+
+    });
+
+  });
+
+  // تشغيل الموسيقى أو إيقافها
+  musicButton.addEventListener("click", async () => {
+
+    if (song.paused) {
+
+      try {
+        await song.play();
+        musicButton.textContent = "♫ Music on";
+      } catch {
+        musicButton.textContent = "♫ Add song.mp3";
+      }
+
+    } else {
+
+      song.pause();
+      musicButton.textContent = "♫ Music off";
+
+    }
+
+  });
+
+  // الاحتفال والانتقال إلى النهاية
+  document.getElementById("makeWish")
+    .addEventListener("click", () => {
+
+      if (!reduceMotion) {
+
+        for (let i = 0; i < 40; i++) {
+
+          const confetti = document.createElement("b");
+
+          confetti.className = "conf";
+          confetti.setAttribute("aria-hidden", "true");
+          confetti.textContent = ["✦", "♡", "✧"][i % 3];
+
+          confetti.style.left =
+            Math.random() * 100 + "vw";
+
+          confetti.style.animationDelay =
+            Math.random() * 0.8 + "s";
+
+          confetti.style.color =
+            ["#ff9fc6", "#ffd5e6", "#b7a7ff"][i % 3];
+
+          document.body.appendChild(confetti);
+
+          setTimeout(() => confetti.remove(), 5000);
+
+        }
+
+      }
+
+      showPage(pages.length - 1);
+
+    });
+
+  // إعادة الموقع إلى البداية
+  document.getElementById("restartButton")
+    .addEventListener("click", () => {
+
+      clearTyping();
+
+      song.pause();
+      song.currentTime = 0;
+
+      unlocked = false;
+
+      journey.classList.add("hide");
+      topBar.classList.add("hide");
+      navigation.classList.add("hide");
+
+      passwordInput.value = "";
+      passwordError.textContent = "";
+
+      gate.classList.add("on");
+
+      musicButton.textContent = "♫ Music off";
+
+      passwordInput.focus();
+
+    });
+
+  // دعم التنقل باستخدام لوحة المفاتيح
+  document.addEventListener("keydown", event => {
+
+    if (
+      !unlocked ||
+      event.target.matches("input,button")
+    ) {
+      return;
+    }
+
+    if (event.key === "ArrowRight") {
+      showPage(currentPage + 1);
+    }
+
+    if (event.key === "ArrowLeft") {
+      showPage(currentPage - 1);
+    }
+
+  });
+
+})();
+</script>
+
+</body>
+</html>
