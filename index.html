@@ -4,732 +4,145 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#140b20">
+<meta name="description" content="A little birthday book made for Menna.">
 <title>For Menna</title>
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Noto+Kufi+Arabic&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Kufi+Arabic:wght@400;600&display=swap');
+:root{--rose:#c85f88;--ink:#3d2937;--paper:#fff8f0;--edge:#e5c9d1;--peach:#f8e1d8;--night:#100914}
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:#140b20;
-  color:#fff;
-  font-family:Arial,sans-serif;
-  overflow:hidden
-}
-
-.sky{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 15%,#702954,transparent 25%),
-    radial-gradient(circle at 85% 85%,#263b70,transparent 28%),
-    #140b20
-}
-
-.page{
-  position:fixed;
-  inset:0;
-  display:grid;
-  place-items:center;
-  padding:5rem 1.2rem;
-  overflow-y:auto;
-  opacity:0;
-  visibility:hidden;
-  transform:scale(1.025);
-  transition:opacity .5s,transform .5s,visibility .5s
-}
-
-.page.on{
-  opacity:1;
-  visibility:visible;
-  transform:none
-}
-
-.in{
-  width:100%;
-  max-width:650px;
-  text-align:center;
-  margin:auto
-}
-
-h1,h2{
-  font:600 clamp(3rem,11vw,6rem) 'Cormorant Garamond',serif;
-  line-height:.95;
-  margin:.3rem
-}
-
-i{color:#ff9fc6}
-
-.k{
-  letter-spacing:.2em;
-  font-size:.65rem;
-  color:#ff9fc6
-}
-
-p{
-  line-height:1.8;
-  color:#e7d6e4;
-  max-width:540px;
-  margin:1rem auto
-}
-
-.heart{
-  font-size:5rem;
-  filter:drop-shadow(0 0 20px #ff76b4);
-  animation:pulse 2s infinite
-}
-
-@keyframes pulse{
-  50%{transform:scale(1.12)}
-}
-
-button,input{
-  border-radius:999px;
-  border:1px solid #ffffff40;
-  padding:.8rem 1.1rem;
-  background:#ffffff14;
-  color:#fff
-}
-
+html,body{margin:0;min-height:100%;font-family:Arial,sans-serif}
+body{height:100dvh;overflow:hidden;background:var(--night);color:var(--ink)}
+button,input,textarea{font:inherit}
 button{cursor:pointer}
-
-button:focus-visible,input:focus-visible{
-  outline:2px solid #ffb5d5;
-  outline-offset:3px
-}
-
-button.main{
-  background:#ffb5d5;
-  color:#321020;
-  border:0;
-  font-weight:bold
-}
-
-.card{
-  padding:1.3rem;
-  border:1px solid #ffffff36;
-  background:#ffffff12;
-  border-radius:22px;
-  backdrop-filter:blur(8px)
-}
-
-.q{
-  font-family:'Noto Kufi Arabic',sans-serif;
-  direction:rtl;
-  font-size:1.05rem
-}
-
-.choices{
-  display:grid;
-  gap:.6rem;
-  max-width:450px;
-  margin:auto
-}
-
-.choices button{
-  text-align:right;
-  font-family:'Noto Kufi Arabic',sans-serif;
-  direction:rtl
-}
-
-.chosen{
-  background:#ff9fc650!important;
-  border-color:#ff9fc6
-}
-
-.reply{
-  font-family:'Noto Kufi Arabic',sans-serif;
-  color:#ffd5e6;
-  min-height:3em
-}
-
-.top{
-  position:fixed;
-  z-index:5;
-  top:1rem;
-  left:1rem;
-  right:1rem;
-  display:flex;
-  justify-content:space-between;
-  align-items:center
-}
-
-.nav{
-  position:fixed;
-  z-index:5;
-  bottom:1rem;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:.5rem
-}
-
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #c85f88;outline-offset:3px}
+.sky{position:fixed;inset:0;background:radial-gradient(ellipse at 20% 15%,#54213e,transparent 35%),radial-gradient(ellipse at 85% 85%,#202747,transparent 34%),var(--night)}
+.top{position:fixed;z-index:20;top:1rem;left:1rem;right:1rem;display:flex;justify-content:space-between;align-items:center;color:#ffe8f0}
+.top.hide,.nav.hide{display:none}
+.top button,.nav button,.action{border:1px solid #ffffff45;border-radius:999px;padding:.7rem 1rem;background:#ffffff18;color:inherit}
+.book{position:fixed;z-index:2;left:50%;top:50%;width:min(88vw,760px);height:min(82vh,850px);transform:translate(-50%,-50%);perspective:1800px}
+.page{position:absolute;inset:0;padding:clamp(1.4rem,5vw,4rem);display:grid;place-items:center;overflow:auto;visibility:hidden;opacity:0;transform:rotateY(-8deg);transform-origin:left center;transition:transform .65s cubic-bezier(.2,.7,.15,1),opacity .45s,visibility .45s;border:1px solid var(--edge);border-radius:5px 15px 15px 5px;background:linear-gradient(90deg,#d8b8b2 0,#f6e8dc 1.4%,var(--paper) 4%,var(--paper) 96%,#e9d3ca 100%);box-shadow:inset 12px 0 18px #6c3b3510,inset -3px 0 8px #fff8,0 25px 65px #0006}
+.page:before{content:"";position:absolute;inset:12px;border:1px solid #d7b7b26b;border-radius:3px 10px 10px 3px;pointer-events:none}
+.page.on{visibility:visible;opacity:1;transform:rotateY(0)}
+.page.leaving{opacity:0;transform:rotateY(-18deg)}
+.page-content{position:relative;z-index:1;width:min(100%,560px);margin:auto;text-align:center}
+h1,h2{margin:.4rem 0;font:600 clamp(2.7rem,9vw,5.4rem)/.95 'Cormorant Garamond',serif;color:var(--ink)}
+h2{font-size:clamp(2.3rem,7vw,4.4rem)}
+i,.rose{color:var(--rose)}
+p{max-width:530px;margin:1rem auto;line-height:1.8;color:#604958}
+.k{font-size:.65rem;letter-spacing:.2em;color:var(--rose);font-weight:bold}
+.heart{font-size:4.8rem;color:#c85f88;filter:drop-shadow(0 0 16px #ff76b466);animation:pulse 2.5s infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+.card{padding:1.4rem;border:1px solid #d7b9bf;background:#fff9f4c7;border-radius:18px}
+.primary{background:var(--rose)!important;color:white!important;border:0!important;font-weight:bold}
+.nav{position:fixed;z-index:20;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:.55rem;color:#fff}
+.nav button{background:#2c1826aa;white-space:nowrap}.nav button:disabled{opacity:.45;cursor:not-allowed}
 .hide{display:none!important}
-
-.conf{
-  position:fixed;
-  top:-20px;
-  animation:fall 4s linear forwards;
-  pointer-events:none
-}
-
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(500deg)}
-}
-
-.typed{min-height:1.4em}
-
-@media(max-width:500px){
-  .form{display:grid;gap:.5rem}
-  .page{padding:5rem 1.2rem 5.5rem}
-  h1,h2{line-height:1}
-  .heart{font-size:4rem}
-}
-
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    transition-duration:.01ms!important
-  }
-}
+.q{font-family:'Noto Kufi Arabic',sans-serif;direction:rtl;font-size:1.05rem}
+.choices{display:grid;gap:.6rem;max-width:450px;margin:1.2rem auto}
+.choices button{padding:.8rem 1rem;border:1px solid #dcb7c2;border-radius:12px;background:#fff8f0;color:#503547;text-align:right;font-family:'Noto Kufi Arabic',sans-serif;direction:rtl}
+.choices button.chosen{background:#f5dce5;border-color:var(--rose)}
+.reply{min-height:3em;color:var(--rose);font-family:'Noto Kufi Arabic',sans-serif}
+.letter{max-height:min(52vh,500px);overflow:auto;text-align:left;padding:.2rem .7rem;scrollbar-color:#d69caf transparent}
+.letter p{font:500 1.12rem/1.85 'Cormorant Garamond',serif;color:#503b49}
+.letter-sign{font-style:italic;color:var(--rose)!important}
+.letter-tools{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+.small{font-size:.82rem;padding:.6rem .9rem}
+.flower{display:inline-grid;place-items:center;width:150px;height:150px;border:0;background:transparent;font-size:5rem;cursor:pointer;transition:transform .3s}
+.flower:hover{transform:scale(1.08) rotate(-5deg)}
+.hidden-message{min-height:3em;color:var(--rose);font-style:italic}
+.song-control{display:flex;gap:.7rem;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:1rem}
+input,textarea{width:100%;padding:.8rem 1rem;border:1px solid #dcb7c2;border-radius:12px;background:#fffdf9;color:var(--ink)}
+textarea{min-height:110px;resize:vertical}
+.form{display:grid;gap:.7rem;text-align:left}
+.form label{font-size:.92rem;color:#604958}
+.status{min-height:1.5em;font-size:.85rem;color:#8f4968}
+.star{position:absolute;right:1.3rem;top:1rem;z-index:3;border:0;background:transparent;color:#c85f88;font-size:1.4rem}
+.cake{font-size:5rem;filter:drop-shadow(0 8px 8px #a5627040)}
+.conf{position:fixed;z-index:30;top:-24px;animation:fall 4s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(500deg)}}
+.typed{min-height:1.5em}
+@media(max-width:520px){.book{width:92vw;height:80dvh}.page{padding:1.4rem 1.25rem}.top{top:.55rem;left:.6rem;right:.6rem}.nav{bottom:.55rem;gap:.3rem}.nav button{padding:.65rem .8rem}.letter{max-height:46dvh}.heart{font-size:3.8rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
-
 <body>
-
 <div class="sky" aria-hidden="true"></div>
-
-<div class="top hide" id="topBar">
-  <span id="pageCount" aria-live="polite"></span>
-  <button id="musicButton" type="button" aria-label="Toggle music">
-    ♫ Music off
-  </button>
-</div>
-
-<!-- ضع ملف الموسيقى song.mp3 بجوار index.html -->
-<audio id="song" loop preload="none">
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
-
-<!-- شاشة كلمة السر -->
-<section class="page on" id="gate">
-  <div class="in">
-
-    <div class="heart">♥</div>
-
-    <p class="k">A SMALL UNIVERSE, MADE FOR YOU</p>
-
-    <h1>For <i>Menna.</i></h1>
-
-    <p>There is a little journey waiting behind this door.</p>
-
-    <form class="card form" id="passwordForm">
-
-      <label for="passwordInput">
-        Enter the date that opens it
-      </label>
-
-      <br><br>
-
-      <input
-        id="passwordInput"
-        type="password"
-        placeholder="dd/mm"
-        inputmode="numeric"
-        autocomplete="off"
-        required
-      >
-
-      <button class="main" type="submit">
-        Enter ♡
-      </button>
-
-      <p id="passwordError" role="status" aria-live="polite"></p>
-
-    </form>
-
+<div class="top hide" id="topBar"><span id="pageCount" aria-live="polite"></span><button id="musicButton" type="button" aria-label="Toggle music">♫ Music off</button></div>
+<!-- Keep song.mp3 in the same folder as index.html to enable the existing music. -->
+<audio id="song" loop preload="none"><source src="song.mp3" type="audio/mpeg"></audio>
+<section class="page on" id="gate" aria-label="Welcome">
+  <div class="page-content"><div class="heart" aria-hidden="true">♥</div><p class="k">A SMALL UNIVERSE, MADE FOR YOU</p><h1>For <i>Menna.</i></h1><p>There is a little journey waiting behind this door.</p>
+    <form class="card form" id="passwordForm"><label for="passwordInput">Enter the date that opens it</label><input id="passwordInput" type="password" placeholder="dd/mm" inputmode="numeric" autocomplete="off" required><button class="primary" type="submit">Enter ♡</button><p class="status" id="passwordError" role="status" aria-live="polite"></p></form>
   </div>
 </section>
-
-<!-- صفحات الموقع -->
-<main id="journey" class="hide">
-
-  <!-- الصفحة الأولى -->
-  <section class="page">
-    <div class="in">
-
-      <p class="k">CHAPTER ONE</p>
-
-      <div class="heart">✦</div>
-
-      <h2>
-        You changed the way<br>
-        I see <i>everything.</i>
-      </h2>
-
-      <p
-        class="typed"
-        data-text="Before you, the ordinary was just ordinary. Then you arrived — and even the smallest moments began to feel worth keeping."
-      ></p>
-
-    </div>
-  </section>
-
-  <!-- السؤال الأول -->
-  <section class="page">
-    <div class="in">
-
-      <p class="k">A QUESTION FOR YOU</p>
-
-      <h2>
-        Pick what feels<br>
-        <i>most you.</i>
-      </h2>
-
-      <p class="q">
-        لو كان يومكِ فيلمًا جميلًا، أي مشهد تحبين أن أكون فيه؟
-      </p>
-
-      <div class="choices">
-
-        <button type="button"
-          data-reply="في كل مشهد… لأن أجمل شيء فيه هو أنكِ فيه. ♡">
-          المشهد الهادئ في آخر اليوم
-        </button>
-
-        <button type="button"
-          data-reply="اختيار دافئ جدًا… وأتمنى أن أكون دائمًا سبب ابتسامتكِ. ♡">
-          المشهد الذي يجعلكِ تبتسمين
-        </button>
-
-        <button type="button"
-          data-reply="كل المغامرات تصبح أحلى عندما نعيشها معًا. ♡">
-          المشهد المليء بالمغامرات
-        </button>
-
-      </div>
-
-      <p class="reply" aria-live="polite"></p>
-
-    </div>
-  </section>
-
-  <!-- الصفحة الثانية -->
-  <section class="page">
-    <div class="in">
-
-      <p class="k">A QUIET TRUTH</p>
-
-      <div class="heart">✧</div>
-
-      <h2>
-        You make life feel<br>
-        more like <i>home.</i>
-      </h2>
-
-      <p
-        class="typed"
-        data-text="Not because you make every day perfect. But because your presence makes the imperfect days softer, safer, and much more beautiful."
-      ></p>
-
-    </div>
-  </section>
-
-  <!-- السؤال الثاني -->
-  <section class="page">
-    <div class="in">
-
-      <p class="k">ANOTHER LITTLE QUESTION</p>
-
-      <h2>
-        A tiny choice,<br>
-        a <i>big answer.</i>
-      </h2>
-
-      <p class="q">
-        ما أكثر شيء تتمنين أن يبقى بيننا دائمًا؟
-      </p>
-
-      <div class="choices">
-
-        <button type="button"
-          data-reply="وأنا أتمنى أن تظل ضحكتكِ سببًا للفرح دائمًا. ♡">
-          الضحك من القلب
-        </button>
-
-        <button type="button"
-          data-reply="أتمنى أن نشعر بالأمان في كل حكاية نشاركها معًا. ♡">
-          الراحة والأمان
-        </button>
-
-        <button type="button"
-          data-reply="هذا وعد جميل: أن تظل التفاصيل الصغيرة هي أجمل ما فينا. ♡">
-          التفاصيل الصغيرة
-        </button>
-
-      </div>
-
-      <p class="reply" aria-live="polite"></p>
-
-    </div>
-  </section>
-
-  <!-- الرسالة -->
-  <section class="page">
-    <div class="in card">
-
-      <p class="k">THE LETTER</p>
-
-      <h2>
-        Happy Birthday,<br>
-        <i>my love.</i>
-      </h2>
-
-      <p
-        class="typed"
-        data-text="I hope this year brings you the kind of happiness that stays — the quiet kind that finds you in little moments and reminds you how loved you are."
-      ></p>
-
-      <p
-        class="typed"
-        data-text="Thank you for being the person whose existence made my world feel brighter. You are precious to me, in more ways than these pages could ever say."
-      ></p>
-
-      <button class="main" id="makeWish" type="button">
-        Make a wish ✦
-      </button>
-
-    </div>
-  </section>
-
-  <!-- النهاية -->
-  <section class="page">
-    <div class="in">
-
-      <div class="heart">♥</div>
-
-      <h1>
-        Happy Birthday,<br>
-        <i>my love.</i>
-      </h1>
-
-      <p
-        class="typed"
-        data-text="May your new year bring warm mornings, beautiful surprises, and every reason to smile. You deserve all of it."
-      ></p>
-
-      <button id="restartButton" type="button">
-        Start again ↺
-      </button>
-
-    </div>
-  </section>
-
+<main class="book hide" id="journey" aria-label="Birthday book">
+  <section class="page"><div class="page-content"><p class="k">CHAPTER ONE</p><div class="heart" aria-hidden="true">✦</div><h2>You changed the way<br>I see <i>everything.</i></h2><p class="typed" data-text="Before you, the ordinary was just ordinary. Then you arrived — and even the smallest moments began to feel worth keeping."></p></div></section>
+  <section class="page"><div class="page-content"><p class="k">A QUESTION FOR YOU</p><h2>Pick what feels<br><i>most you.</i></h2><p class="q">لو كان يومكِ فيلمًا جميلًا، أي مشهد تحبين أن أكون فيه؟</p><div class="choices"><button type="button" data-reply="في كل مشهد… لأن أجمل شيء فيه هو أنكِ فيه. ♡">المشهد الهادئ في آخر اليوم</button><button type="button" data-reply="اختيار دافئ جدًا… وأتمنى أن أكون دائمًا سبب ابتسامتكِ. ♡">المشهد الذي يجعلكِ تبتسمين</button><button type="button" data-reply="كل المغامرات تصبح أحلى عندما نعيشها معًا. ♡">المشهد المليء بالمغامرات</button></div><p class="reply" aria-live="polite"></p></div></section>
+  <section class="page"><div class="page-content"><p class="k">A QUIET TRUTH</p><div class="heart" aria-hidden="true">✧</div><h2>You make life feel<br>more like <i>home.</i></h2><p class="typed" data-text="Not because you make every day perfect. But because your presence makes the imperfect days softer, safer, and much more beautiful."></p></div></section>
+  <section class="page"><div class="page-content"><p class="k">ANOTHER LITTLE QUESTION</p><h2>A tiny choice,<br>a <i>big answer.</i></h2><p class="q">ما أكثر شيء تتمنين أن يبقى بيننا دائمًا؟</p><div class="choices"><button type="button" data-reply="وأنا أتمنى أن تظل ضحكتكِ سببًا للفرح دائمًا. ♡">الضحك من القلب</button><button type="button" data-reply="أتمنى أن نشعر بالأمان في كل حكاية نشاركها معًا. ♡">الراحة والأمان</button><button type="button" data-reply="هذا وعد جميل: أن تظل التفاصيل الصغيرة هي أجمل ما فينا. ♡">التفاصيل الصغيرة</button></div><p class="reply" aria-live="polite"></p></div></section>
+  <section class="page"><div class="page-content card"><p class="k">A LETTER TO MENNA</p><h2>Some feelings deserve<br>more than a <i>moment.</i></h2><p>Some things are easier to write than to say.</p><div class="letter" id="loveLetter" aria-live="polite">
+    <p>My dearest Menna,</p>
+    <p>Happy birthday to the person who makes the world feel a little softer just by being in it. I hope this new year brings you the kind of happiness that stays — the quiet kind that finds you in ordinary moments and reminds you how deeply loved you are.</p>
+    <p>Thank you for being exactly who you are: for your warmth, your laughter, and the way you make even simple moments feel worth remembering. Having you in my life has changed the way I see everything. You make the imperfect days gentler, the good days brighter, and the future something I look forward to.</p>
+    <p>I hope you always see yourself with some of the tenderness I see in you. You deserve every beautiful thing that comes your way, every reason to smile, and a year filled with little surprises that feel like they were made just for you.</p>
+    <p>Whatever this next chapter brings, I hope you never forget how special you are to me. I am grateful for every memory we have made and excited for all the little moments still waiting for us.</p>
+    <p class="letter-sign">With all the words I could find, and all the feelings they could never fully hold.<br>With love, always ♡</p>
+  </div><div class="letter-tools"><button class="action small" id="revealLetter" type="button">Read the letter ♡</button><button class="action small" id="showAllLetter" type="button">Show all at once</button></div></div></section>
+  <section class="page"><div class="page-content"><p class="k">A LITTLE SOMETHING FOR YOU</p><h2>A flower for <i>now.</i></h2><button class="flower" id="flower" type="button" aria-label="Tap the flower">🌷</button><p>Tap the flower.</p><p class="hidden-message" id="flowerMessage" aria-live="polite"></p></div></section>
+  <section class="page"><div class="page-content"><p class="k">A LITTLE SOUNDTRACK</p><h2>For the moments<br>you want to <i>keep.</i></h2><p>The original music file is kept as <strong>song.mp3</strong>. Start or pause it whenever you like.</p><div class="song-control"><button class="action primary" id="playSong" type="button">♫ Play music</button><span id="musicStatus" class="status" aria-live="polite"></span></div></div></section>
+  <section class="page"><div class="page-content"><button class="star" id="hiddenStar" type="button" aria-label="A hidden note">✦</button><p class="k">A SMALL NOTE, JUST FOR YOU</p><div class="heart" aria-hidden="true">✧</div><h2>Some things are<br>found by <i>surprise.</i></h2><p>Some of the most meaningful things are the ones we never planned to find. ♡</p></div></section>
+  <section class="page"><div class="page-content"><p class="k">A LETTER TO YOURSELF</p><h2>Leave a note for<br>your <i>future self.</i></h2><form class="form card" id="selfLetterForm"><label for="selfLetter">Write anything you would like to remember.</label><textarea id="selfLetter" placeholder="Dear future me..."></textarea><button class="primary" type="submit">Save my letter ♡</button><p class="status" id="selfStatus" role="status"></p></form></div></section>
+  <section class="page"><div class="page-content"><p class="k">A LETTER TO ME</p><h2>One thing you want<br>me to <i>know.</i></h2><form class="form card" id="toMeForm"><label for="toMeLetter">Leave me a message. It will stay saved on this device.</label><textarea id="toMeLetter" placeholder="Dear..."></textarea><button class="primary" type="submit">Save my message ♡</button><p class="status" id="toMeStatus" role="status"></p></form></div></section>
+  <section class="page"><div class="page-content"><p class="k">BEFORE THE LAST PAGE</p><div class="heart" aria-hidden="true">♡</div><h2>One last thing…</h2><p>Before we get to your birthday wish, there is one more little thing I want to tell you.</p><button id="lastThing" class="primary action" type="button">One last thing… ♡</button><p id="lastMessage" class="hidden-message" aria-live="polite"></p></div></section>
+  <section class="page"><div class="page-content"><p class="k">MAKE A WISH</p><div class="cake" aria-hidden="true">🎂</div><h1>Happy Birthday,<br><i>my love.</i></h1><p class="typed" data-text="May your new year bring warm mornings, beautiful surprises, and every reason to smile. You deserve all of it."></p><button id="makeWish" class="primary action" type="button">Make a wish ✦</button><p><button id="restartButton" class="action small" type="button">Read it again ↺</button></p></div></section>
 </main>
-
-<!-- أزرار التنقل -->
-<nav class="nav hide" id="navigation" aria-label="Page navigation">
-
-  <button id="previousButton" type="button">
-    ← Back
-  </button>
-
-  <button id="nextButton" class="main" type="button">
-    Next →
-  </button>
-
-</nav>
-
+<nav class="nav hide" id="navigation" aria-label="Page navigation"><button id="previousButton" type="button">← Back</button><button id="nextButton" class="primary" type="button">Next →</button></nav>
 <script>
 (() => {
   "use strict";
-
   const PASSWORD = "19/11";
-
-  const gate = document.getElementById("gate");
-  const form = document.getElementById("passwordForm");
-  const passwordInput = document.getElementById("passwordInput");
-  const passwordError = document.getElementById("passwordError");
-
-  const journey = document.getElementById("journey");
-  const pages = Array.from(journey.querySelectorAll(".page"));
-
-  const topBar = document.getElementById("topBar");
-  const navigation = document.getElementById("navigation");
-  const pageCount = document.getElementById("pageCount");
-
-  const previousButton = document.getElementById("previousButton");
-  const nextButton = document.getElementById("nextButton");
-
-  const musicButton = document.getElementById("musicButton");
-  const song = document.getElementById("song");
-
-  const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
-  let currentPage = 0;
-  let typeTimers = [];
-  let unlocked = false;
-
-  // إيقاف الكتابة السابقة عند تغيير الصفحة
-  function clearTyping() {
-    typeTimers.forEach(timer => clearTimeout(timer));
-    typeTimers = [];
-  }
-
-  // كتابة النص كلمة كلمة
-  function typeElement(element, delay = 48) {
-    const text = element.dataset.text || "";
-
-    element.textContent = "";
-
-    if (reduceMotion) {
-      element.textContent = text;
-      return;
-    }
-
-    const words = text.split(/\s+/);
-    let index = 0;
-
-    function writeNext() {
-      if (index >= words.length) return;
-
-      element.textContent +=
-        (index ? " " : "") + words[index++];
-
-      typeTimers.push(
-        setTimeout(writeNext, delay)
-      );
-    }
-
-    writeNext();
-  }
-
-  // الانتقال بين صفحات الرحلة
+  const gate = document.getElementById("gate"), form = document.getElementById("passwordForm"), passwordInput = document.getElementById("passwordInput"), passwordError = document.getElementById("passwordError");
+  const journey = document.getElementById("journey"), pages = Array.from(journey.querySelectorAll(".page")), topBar = document.getElementById("topBar"), navigation = document.getElementById("navigation"), pageCount = document.getElementById("pageCount");
+  const previousButton = document.getElementById("previousButton"), nextButton = document.getElementById("nextButton"), musicButton = document.getElementById("musicButton"), song = document.getElementById("song"), reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let currentPage = 0, unlocked = false, touchStartX = 0;
   function showPage(index) {
     if (!unlocked) return;
-
-    currentPage = Math.max(
-      0,
-      Math.min(pages.length - 1, index)
-    );
-
-    clearTyping();
-
-    pages.forEach((page, i) => {
-      page.classList.toggle(
-        "on",
-        i === currentPage
-      );
-
-      if (i === currentPage) {
-        page.scrollTop = 0;
-      }
-    });
-
-    pageCount.textContent =
-      String(currentPage + 1).padStart(2, "0") +
-      " / " +
-      String(pages.length).padStart(2, "0");
-
+    const next = Math.max(0, Math.min(pages.length - 1, index));
+    if (next === currentPage && pages[next].classList.contains("on")) return;
+    const old = pages[currentPage]; old.classList.remove("on"); old.classList.add("leaving");
+    currentPage = next;
+    pages.forEach((page, i) => { page.classList.toggle("on", i === currentPage); if (i !== currentPage) page.classList.remove("leaving"); if (i === currentPage) page.scrollTop = 0; });
+    pageCount.textContent = String(currentPage + 1).padStart(2,"0") + " / " + String(pages.length).padStart(2,"0");
     previousButton.disabled = currentPage === 0;
-
-    nextButton.disabled =
-      currentPage === pages.length - 1;
-
-    nextButton.classList.toggle(
-      "hide",
-      currentPage === pages.length - 1
-    );
-
-    const typedElements =
-      pages[currentPage].querySelectorAll(".typed");
-
-    typedElements.forEach((element, i) => {
-      typeTimers.push(
-        setTimeout(() => {
-          if (pages[currentPage].contains(element)) {
-            typeElement(element);
-          }
-        }, i * 450)
-      );
-    });
+    nextButton.disabled = currentPage === pages.length - 1;
+    nextButton.classList.toggle("hide", currentPage === pages.length - 1);
+    if (currentPage === 4 && !document.getElementById("loveLetter").dataset.started) revealParagraph();
   }
-
-  // التحقق من كلمة السر
   form.addEventListener("submit", async event => {
-    event.preventDefault();
-
-    passwordError.textContent = "";
-
-    if (passwordInput.value.trim() !== PASSWORD) {
-      passwordError.textContent =
-        "Almost — try the date again. ♡";
-
-      passwordInput.select();
-      return;
-    }
-
-    unlocked = true;
-
-    gate.classList.remove("on");
-
-    journey.classList.remove("hide");
-    topBar.classList.remove("hide");
-    navigation.classList.remove("hide");
-
-    // عرض الصفحة الأولى بعد الدخول
-    showPage(0);
-
-    // محاولة تشغيل الموسيقى
-    try {
-      await song.play();
-      musicButton.textContent = "♫ Music on";
-    } catch {
-      musicButton.textContent = "♫ Play music";
-    }
+    event.preventDefault(); passwordError.textContent = "";
+    if (passwordInput.value.trim() !== PASSWORD) { passwordError.textContent = "Almost — try the date again. ♡"; passwordInput.select(); return; }
+    unlocked = true; gate.classList.remove("on"); journey.classList.remove("hide"); topBar.classList.remove("hide"); navigation.classList.remove("hide"); showPage(0);
+    try { await song.play(); musicButton.textContent = "♫ Music on"; document.getElementById("musicStatus").textContent = ""; } catch { musicButton.textContent = "♫ Play music"; }
   });
-
-  // الانتقال للأمام والخلف
-  previousButton.addEventListener("click", () => {
-    showPage(currentPage - 1);
-  });
-
-  nextButton.addEventListener("click", () => {
-    showPage(currentPage + 1);
-  });
-
-  // تفاعلات الاختيارات العربية
-  document.querySelectorAll("[data-reply]").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      const group = button.closest(".choices");
-
-      group.querySelectorAll("button").forEach(item => {
-        item.classList.remove("chosen");
-      });
-
-      button.classList.add("chosen");
-
-      const reply = group.nextElementSibling;
-
-      if (reply && reply.classList.contains("reply")) {
-        reply.textContent = button.dataset.reply;
-      }
-
-    });
-
-  });
-
-  // تشغيل الموسيقى أو إيقافها
-  musicButton.addEventListener("click", async () => {
-
-    if (song.paused) {
-
-      try {
-        await song.play();
-        musicButton.textContent = "♫ Music on";
-      } catch {
-        musicButton.textContent = "♫ Add song.mp3";
-      }
-
-    } else {
-
-      song.pause();
-      musicButton.textContent = "♫ Music off";
-
-    }
-
-  });
-
-  // الاحتفال والانتقال إلى النهاية
-  document.getElementById("makeWish")
-    .addEventListener("click", () => {
-
-      if (!reduceMotion) {
-
-        for (let i = 0; i < 40; i++) {
-
-          const confetti = document.createElement("b");
-
-          confetti.className = "conf";
-          confetti.setAttribute("aria-hidden", "true");
-          confetti.textContent = ["✦", "♡", "✧"][i % 3];
-
-          confetti.style.left =
-            Math.random() * 100 + "vw";
-
-          confetti.style.animationDelay =
-            Math.random() * 0.8 + "s";
-
-          confetti.style.color =
-            ["#ff9fc6", "#ffd5e6", "#b7a7ff"][i % 3];
-
-          document.body.appendChild(confetti);
-
-          setTimeout(() => confetti.remove(), 5000);
-
-        }
-
-      }
-
-      showPage(pages.length - 1);
-
-    });
-
-  // إعادة الموقع إلى البداية
-  document.getElementById("restartButton")
-    .addEventListener("click", () => {
-
-      clearTyping();
-
-      song.pause();
-      song.currentTime = 0;
-
-      unlocked = false;
-
-      journey.classList.add("hide");
-      topBar.classList.add("hide");
-      navigation.classList.add("hide");
-
-      passwordInput.value = "";
-      passwordError.textContent = "";
-
-      gate.classList.add("on");
-
-      musicButton.textContent = "♫ Music off";
-
-      passwordInput.focus();
-
-    });
-
-  // دعم التنقل باستخدام لوحة المفاتيح
-  document.addEventListener("keydown", event => {
-
-    if (
-      !unlocked ||
-      event.target.matches("input,button")
-    ) {
-      return;
-    }
-
-    if (event.key === "ArrowRight") {
-      showPage(currentPage + 1);
-    }
-
-    if (event.key === "ArrowLeft") {
-      showPage(currentPage - 1);
-    }
-
-  });
-
+  previousButton.addEventListener("click", () => showPage(currentPage - 1)); nextButton.addEventListener("click", () => showPage(currentPage + 1));
+  document.querySelectorAll("[data-reply]").forEach(button => button.addEventListener("click", () => { const group = button.closest(".choices"); group.querySelectorAll("button").forEach(item => item.classList.remove("chosen")); button.classList.add("chosen"); const reply = group.nextElementSibling; if (reply) reply.textContent = button.dataset.reply; }));
+  async function toggleMusic() { if (song.paused) { try { await song.play(); musicButton.textContent = "♫ Music on"; document.getElementById("musicStatus").textContent = "Playing song.mp3"; } catch { musicButton.textContent = "♫ Add song.mp3"; document.getElementById("musicStatus").textContent = "Add song.mp3 beside index.html to hear the music."; } } else { song.pause(); musicButton.textContent = "♫ Music off"; document.getElementById("musicStatus").textContent = "Paused"; } }
+  musicButton.addEventListener("click", toggleMusic); document.getElementById("playSong").addEventListener("click", toggleMusic);
+  const paragraphs = Array.from(document.querySelectorAll("#loveLetter > p")); let letterIndex = 0;
+  function revealParagraph() { const letter = document.getElementById("loveLetter"); letter.dataset.started = "true"; if (letterIndex >= paragraphs.length) return; paragraphs[letterIndex].classList.remove("hide"); paragraphs[letterIndex].scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block:"nearest"}); letterIndex++; if (letterIndex < paragraphs.length) window.setTimeout(revealParagraph, 650); }
+  paragraphs.forEach((p,i) => { if (i > 0) p.classList.add("hide"); });
+  document.getElementById("revealLetter").addEventListener("click", revealParagraph);
+  document.getElementById("showAllLetter").addEventListener("click", () => { paragraphs.forEach(p => p.classList.remove("hide")); letterIndex = paragraphs.length; document.getElementById("loveLetter").dataset.started = "true"; });
+  document.getElementById("flower").addEventListener("click", () => { document.getElementById("flowerMessage").textContent = "Just a little something for now, until the real one arrives. ♡"; });
+  document.getElementById("hiddenStar").addEventListener("click", event => { event.currentTarget.textContent = "♡"; });
+  function saveLetter(formId, inputId, key, statusId, message) { document.getElementById(formId).addEventListener("submit", event => { event.preventDefault(); const value = document.getElementById(inputId).value.trim(); if (!value) { document.getElementById(statusId).textContent = "Write a little something first. ♡"; return; } try { localStorage.setItem(key, value); document.getElementById(statusId).textContent = message; } catch { document.getElementById(statusId).textContent = "This browser could not save the letter."; } }); }
+  saveLetter("selfLetterForm","selfLetter","menna-self-letter","selfStatus","Saved on this device. ♡"); saveLetter("toMeForm","toMeLetter","menna-letter-to-me","toMeStatus","Saved on this device. ♡");
+  document.getElementById("lastThing").addEventListener("click", event => { document.getElementById("lastMessage").textContent = "You are loved for who you are, in the little moments and in all the ways words can never quite hold. ♡"; event.currentTarget.classList.add("hide"); });
+  document.getElementById("makeWish").addEventListener("click", () => { if (!reduceMotion) for (let i=0;i<40;i++) { const c=document.createElement("b"); c.className="conf"; c.setAttribute("aria-hidden","true"); c.textContent=["✦","♡","✧"][i%3]; c.style.left=Math.random()*100+"vw"; c.style.animationDelay=Math.random()*0.8+"s"; c.style.color=["#ff9fc6","#ffd5e6","#b7a7ff"][i%3]; document.body.appendChild(c); setTimeout(()=>c.remove(),5000); } });
+  document.getElementById("restartButton").addEventListener("click", () => { song.pause(); song.currentTime=0; unlocked=false; journey.classList.add("hide"); topBar.classList.add("hide"); navigation.classList.add("hide"); passwordInput.value=""; passwordError.textContent=""; gate.classList.add("on"); musicButton.textContent="♫ Music off"; document.getElementById("musicStatus").textContent=""; currentPage=0; passwordInput.focus(); });
+  document.addEventListener("keydown", event => { if (!unlocked || event.target.matches("input,textarea,button")) return; if (event.key === "ArrowRight") showPage(currentPage+1); if (event.key === "ArrowLeft") showPage(currentPage-1); });
+  journey.addEventListener("touchstart", event => { touchStartX=event.changedTouches[0].screenX; }, {passive:true}); journey.addEventListener("touchend", event => { const delta=event.changedTouches[0].screenX-touchStartX; if (Math.abs(delta)>65) showPage(currentPage+(delta<0?1:-1)); }, {passive:true});
 })();
 </script>
-
 </body>
 </html>
