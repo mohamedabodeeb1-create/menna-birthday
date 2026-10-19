@@ -20,7 +20,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 .top.hide,.nav.hide{display:none}
 .top button,.nav button,.action{border:1px solid #ffffff45;border-radius:999px;padding:.7rem 1rem;background:#ffffff18;color:inherit}
 .book{position:fixed;z-index:2;left:50%;top:50%;width:min(88vw,760px);height:min(82vh,850px);transform:translate(-50%,-50%);perspective:1800px}
-.page{position:absolute;inset:0;padding:clamp(1.4rem,5vw,4rem);display:grid;place-items:center;overflow:auto;visibility:hidden;opacity:0;transform:rotateY(-8deg);transform-origin:left center;transition:transform .65s cubic-bezier(.2,.7,.15,1),opacity .45s,visibility .45s;border:1px solid var(--edge);border-radius:5px 15px 15px 5px;background:linear-gradient(90deg,#d8b8b2 0,#f6e8dc 1.4%,var(--paper) 4%,var(--paper) 96%,#e9d3ca 100%);box-shadow:inset 12px 0 18px #6c3b3510,inset -3px 0 8px #fff8,0 25px 65px #0006}
+.page{position:absolute;inset:0;padding:clamp(1.4rem,5vw,4rem);display:grid;place-items:safe center;overflow:auto;visibility:hidden;opacity:0;transform:rotateY(-8deg);transform-origin:left center;transition:transform .65s cubic-bezier(.2,.7,.15,1),opacity .45s,visibility .45s;border:1px solid var(--edge);border-radius:5px 15px 15px 5px;background:linear-gradient(90deg,#d8b8b2 0,#f6e8dc 1.4%,var(--paper) 4%,var(--paper) 96%,#e9d3ca 100%);box-shadow:inset 12px 0 18px #6c3b3510,inset -3px 0 8px #fff8,0 25px 65px #0006}
 .page:before{content:"";position:absolute;inset:12px;border:1px solid #d7b7b26b;border-radius:3px 10px 10px 3px;pointer-events:none}
 .page.on{visibility:visible;opacity:1;transform:rotateY(0)}
 .page.leaving{opacity:0;transform:rotateY(-18deg)}
